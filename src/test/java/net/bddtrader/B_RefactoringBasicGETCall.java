@@ -1,0 +1,51 @@
+package net.bddtrader;
+
+import io.restassured.RestAssured;
+import org.hamcrest.Matchers;
+import org.junit.Before;
+import org.junit.Test;
+
+import static io.restassured.RestAssured.given;
+
+public class B_RefactoringBasicGETCall {
+
+    @Before
+    public void background() {
+        // Adding the contents which will be static all the time like the baseURI
+        RestAssured.baseURI = "https://bddtrader.herokuapp.com/api";
+    }
+
+    @Test
+    public void basic_RESTAssured_GET_Call_Way1() {
+        RestAssured.get("/stock/aapl/company")
+                .then()
+                    .log().all()
+                    .body("companyName", Matchers.equalTo("Apple, Inc."))
+                    .body("sector", Matchers.equalTo("Electronic Technology"));
+    }
+
+    @Test
+    public void basic_RESTAssured_GET_Call_Way2(){
+        given().
+        when().
+                get("/stock/aapl/company").
+        then().
+                log().all().
+                body("companyName", Matchers.equalTo("Apple, Inc.")).
+                body("sector", Matchers.equalTo("Electronic Technology"));
+    }
+
+    @Test
+    public void basic_RESTAssured_GET_Call_Way3(){
+        given().
+                basePath("stock/aapl/company").
+        when().
+                get().
+        then().
+                log().all().
+                body("companyName", Matchers.equalTo("Apple, Inc.")).
+                body("sector", Matchers.equalTo("Electronic Technology"));
+    }
+
+
+}
