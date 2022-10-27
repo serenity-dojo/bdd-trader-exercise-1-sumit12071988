@@ -12,12 +12,12 @@ public class B_RefactoringBasicGETCall {
     @Before
     public void background() {
         // Adding the contents which will be static all the time like the baseURI
-        RestAssured.baseURI = "https://bddtrader.herokuapp.com/api";
+        RestAssured.baseURI = "https://bddtrader.herokuapp.com";
     }
 
     @Test
     public void basic_RESTAssured_GET_Call_Way1() {
-        RestAssured.get("/stock/aapl/company")
+        RestAssured.get("/api/stock/aapl/company")
                 .then()
                     .log().all()
                     .body("companyName", Matchers.equalTo("Apple, Inc."))
@@ -28,7 +28,7 @@ public class B_RefactoringBasicGETCall {
     public void basic_RESTAssured_GET_Call_Way2(){
         given().
         when().
-                get("/stock/aapl/company").
+                get("/api/stock/aapl/company").
         then().
                 log().all().
                 body("companyName", Matchers.equalTo("Apple, Inc.")).
@@ -38,7 +38,7 @@ public class B_RefactoringBasicGETCall {
     @Test
     public void basic_RESTAssured_GET_Call_Way3(){
         given().
-                basePath("stock/aapl/company").
+                basePath("api/stock/aapl/company").
         when().
                 get().
         then().

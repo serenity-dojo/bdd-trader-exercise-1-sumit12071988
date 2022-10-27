@@ -32,8 +32,8 @@ public class A_BasicGETCall {
     @Test
     public void basic_RESTAssured_GET_Call_Way3(){
         given().
-                baseUri("https://bddtrader.herokuapp.com/api").
-                basePath("stock/aapl/company").
+                baseUri("https://bddtrader.herokuapp.com").
+                basePath("api/stock/aapl/company").
         when().
                 get().
         then().
