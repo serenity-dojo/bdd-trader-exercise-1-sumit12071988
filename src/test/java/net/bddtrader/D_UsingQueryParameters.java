@@ -25,7 +25,7 @@ public class D_UsingQueryParameters {
                 log().all().
                 get("/api/news").
         then().
-                log().all().
+                log().body().
                 body("related",everyItem(containsStringIgnoringCase(queryParamValue)));
     }
 
@@ -38,7 +38,7 @@ public class D_UsingQueryParameters {
                 log().all().
                 get().
         then().
-                log().all().
+                log().body().
                 body("related",everyItem(containsStringIgnoringCase(queryParamValue)));
     }
 

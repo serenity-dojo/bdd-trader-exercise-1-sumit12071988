@@ -183,8 +183,8 @@ public class E_JSONPathAssertionExercises {
                 get().
         then().
                 log().all().
-                body("trades.min{trade -> trade.price}.size",equalTo(100f));          // Way #1
-//                body("trades.min{it.price}.size",equalTo(100f));    // Way #2
+//                body("trades.min{trade -> trade.price}.size",equalTo(100f));          // Way #1
+                body("trades.min{it.price}.size",equalTo(100f));    // Way #2
     }
 
     /**
