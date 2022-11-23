@@ -22,6 +22,7 @@ public class A_BasicGETCall {
     public void basic_RESTAssured_GET_Call_Way2(){
         given().
         when().
+                log().all().
                 get("https://bddtrader.herokuapp.com/api/stock/aapl/company").
         then().
                 log().all().
@@ -35,6 +36,7 @@ public class A_BasicGETCall {
                 baseUri("https://bddtrader.herokuapp.com").
                 basePath("api/stock/aapl/company").
         when().
+                log().all().
                 get().
         then().
                 log().all().

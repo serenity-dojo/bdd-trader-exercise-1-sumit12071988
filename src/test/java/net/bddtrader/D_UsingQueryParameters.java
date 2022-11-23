@@ -22,6 +22,7 @@ public class D_UsingQueryParameters {
         given().
                 queryParam("symbols",queryParamValue).
         when().
+                log().all().
                 get("/api/news").
         then().
                 log().all().
@@ -34,6 +35,7 @@ public class D_UsingQueryParameters {
                 basePath("api/news").
                 queryParam("symbols",queryParamValue).
         when().
+                log().all().
                 get().
         then().
                 log().all().

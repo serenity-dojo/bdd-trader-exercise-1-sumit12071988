@@ -28,6 +28,7 @@ public class C_UsingPathParameters {
         given().
                 pathParam("stockId","aapl").    // Creating path parameter with a value for replacement
         when().
+                log().all().
                 get("/api/stock/{stockId}/company"). // Replacing dynamic part of base path with Path Parameter/ placeholder
         then().
                 log().all().
@@ -41,6 +42,7 @@ public class C_UsingPathParameters {
                 basePath("api/stock/{stockId}/company").    // Replacing dynamic part of base path with Path Parameter/ placeholder
                 pathParam("stockId","aapl").    // Passing the value for Path Parameter for replacement
         when().
+                log().all().
                 get().
         then().
                 log().all().

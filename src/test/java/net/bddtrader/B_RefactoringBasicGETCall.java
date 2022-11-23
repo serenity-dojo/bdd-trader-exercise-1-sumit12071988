@@ -28,6 +28,7 @@ public class B_RefactoringBasicGETCall {
     public void basic_RESTAssured_GET_Call_Way2(){
         given().
         when().
+                log().all().
                 get("/api/stock/aapl/company").
         then().
                 log().all().
@@ -40,6 +41,7 @@ public class B_RefactoringBasicGETCall {
         given().
                 basePath("api/stock/aapl/company").
         when().
+                log().all().
                 get().
         then().
                 log().all().
