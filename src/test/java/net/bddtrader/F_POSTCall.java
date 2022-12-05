@@ -17,15 +17,18 @@ public class F_POSTCall {
 
     @Test
     public void each_new_client_should_get_a_unique_id(){
-        String jsonBody="{\n" +
-                            "    \"email\": \"scott_atkins@gmail.com\",\n" +
-                            "    \"firstName\": \"Scott\",\n" +
-                            "    \"lastName\": \"Atkins\"\n" +
-                            "}";
+        String jsonBody= """
+                            {
+                                "email": "scott_atkins@gmail.com",
+                                "firstName": "Scott",
+                                "lastName": "Atkins"
+                            }
+                        """;
 
         given()
                 .basePath("/api/client")
                 .contentType(ContentType.JSON)
+                .accept(ContentType.ANY)
                 .body(jsonBody)
         .when()
                 .post()
