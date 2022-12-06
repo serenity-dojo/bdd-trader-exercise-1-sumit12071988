@@ -13,15 +13,15 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.bddtrader.pojo.POJOClass.*;
 import static net.serenitybdd.rest.RestRequests.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 
 public class F_POSTCall {
 
     @Before
     public void setupBaseURL(){
-        RestAssured.baseURI="https://bddtrader.herokuapp.com/";
+        RestAssured.baseURI="https://bddtrader.herokuapp.com";
     }
 
     @Test
@@ -35,7 +35,7 @@ public class F_POSTCall {
                         """;
 
         given()
-                .basePath("/api/client")
+                .basePath("api/client")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.ANY)
                 .body(jsonBody)
@@ -55,7 +55,7 @@ public class F_POSTCall {
         File fileObject = new File("src/test/resources/client.json");
 
         given()
-                .basePath("/api/client")
+                .basePath("api/client")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.ANY)
                 .body(fileObject)
@@ -86,7 +86,7 @@ public class F_POSTCall {
         System.out.println("**** JSON BODY formed using POJO class object: "+clientJSONBody);
 
         given()
-                .basePath("/api/client")
+                .basePath("api/client")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.ANY)
                 .body(clientJSONBody)
@@ -110,7 +110,7 @@ public class F_POSTCall {
                                 .andEmail("sumit.saha@gmail.com");
 
     given()
-            .basePath("/api/client")
+            .basePath("api/client")
             .contentType(ContentType.JSON)
             .accept(ContentType.ANY)
             .body(jsonClassObject)
@@ -137,7 +137,7 @@ public class F_POSTCall {
                                                 //  This KEY in this case will be ignored and only required keys will be passed by Rest Assured
 
         given()
-                .basePath("/api/client")
+                .basePath("api/client")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.ANY)
                 .body(jsonMapObject)

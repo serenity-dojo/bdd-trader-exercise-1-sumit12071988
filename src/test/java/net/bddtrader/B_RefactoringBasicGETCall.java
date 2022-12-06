@@ -17,7 +17,7 @@ public class B_RefactoringBasicGETCall {
 
     @Test
     public void basic_RESTAssured_GET_Call_Way1() {
-        RestAssured.get("/api/stock/aapl/company")
+        RestAssured.get("api/stock/aapl/company")
                 .then()
                     .log().all()
                     .body("companyName", Matchers.equalTo("Apple, Inc."))
@@ -29,9 +29,9 @@ public class B_RefactoringBasicGETCall {
         given().
         when().
                 log().all().
-                get("/api/stock/aapl/company").
+                get("api/stock/aapl/company").
         then().
-                log().all().
+                log().body().
                 body("companyName", Matchers.equalTo("Apple, Inc.")).
                 body("sector", Matchers.equalTo("Electronic Technology"));
     }

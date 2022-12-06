@@ -23,7 +23,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_a_simple_field_value() {
         given().
-                basePath("/api/stock/{stockId}/company").
+                basePath("api/stock/{stockId}/company").
                 pathParam("stockId","aapl").
         when().
                 log().all().
@@ -42,7 +42,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void check_that_a_field_value_contains_a_given_string() {
         given().
-                basePath("/api/stock/{stockId}/company").
+                basePath("api/stock/{stockId}/company").
                 pathParam("stockId","aapl").
         when().
                 log().all().
@@ -63,7 +63,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_a_nested_field_value() {
         given().
-                basePath("/api/stock/{stockId}/book").
+                basePath("api/stock/{stockId}/book").
                 pathParam("stockId","aapl").
         when().
                 log().all().
@@ -83,7 +83,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_a_list_of_values() {
         given().
-                basePath("/api/tops/last").
+                basePath("api/tops/last").
         when().
                 get().
         then().
@@ -99,7 +99,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void make_sure_at_least_one_item_matches_a_given_condition() {
         given().
-                basePath("/api/tops/last").
+                basePath("api/tops/last").
         when().
                 get().
         then().
@@ -114,7 +114,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_a_field_of_an_element_in_a_list() {
         given().
-                basePath("/api/stock/{stockId}/book").
+                basePath("api/stock/{stockId}/book").
                 pathParam("stockId","aapl").
         when().
                 get().
@@ -130,7 +130,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_a_field_of_the_last_element_in_a_list() {
         given().
-                basePath("/api/stock/{stockId}/book").
+                basePath("api/stock/{stockId}/book").
                 pathParam("stockId","aapl").
         when().
                 get().
@@ -146,7 +146,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_the_number_of_trades() {
         given().
-                basePath("/api/stock/{stockId}/book").
+                basePath("api/stock/{stockId}/book").
                 pathParam("stockId","aapl").
         when().
                 get().
@@ -162,7 +162,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_the_minimum_trade_price() {
         given().
-                basePath("/api/stock/{stockId}/book").
+                basePath("api/stock/{stockId}/book").
                 pathParam("stockId","aapl").
         when().
                 get().
@@ -179,7 +179,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_the_size_of_the_trade_with_the_minimum_trade_price() {
         given().
-                basePath("/api/stock/{stockId}/book").
+                basePath("api/stock/{stockId}/book").
                 pathParam("stockId","aapl").
         when().
                 get().
@@ -196,7 +196,7 @@ public class E_JSONPathAssertionExercises {
     @Test
     public void find_the_number_of_trades_with_a_price_greater_than_some_value() {
         given().
-                basePath("/api/stock/{stockId}/book").
+                basePath("api/stock/{stockId}/book").
                 pathParam("stockId","aapl").
         when().
                 get().

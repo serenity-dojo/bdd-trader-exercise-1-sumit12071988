@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 public class G_DELETECall {
     @Before
     public void setupBaseURL(){
-        RestAssured.baseURI="https://bddtrader.herokuapp.com/";
+        RestAssured.baseURI="https://bddtrader.herokuapp.com";
     }
 
     @Test
@@ -29,7 +29,7 @@ public class G_DELETECall {
         System.out.println("**** JSON Body: "+ jsonBody);
 
         String id = given()
-                            .basePath("/api/client")
+                            .basePath("api/client")
                             .contentType(ContentType.JSON)
                             .body(jsonBody)
                     .when()
@@ -39,7 +39,7 @@ public class G_DELETECall {
 
         // When I delete the client
         given()
-                .basePath("/api/client/{clientId}")
+                .basePath("api/client/{clientId}")
                 .pathParam("clientId",id)
         .when()
                 .log().all()
@@ -50,7 +50,7 @@ public class G_DELETECall {
 
         // Then the client should no longer exist
         given()
-                .basePath("/api/client/{clientId}")
+                .basePath("api/client/{clientId}")
                 .pathParam("clientId",id)
         .when()
                 .log().all()

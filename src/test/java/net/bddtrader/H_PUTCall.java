@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class H_PUTCall {
     @Before
     public void setupBaseURL(){
-        RestAssured.baseURI="https://bddtrader.herokuapp.com/";
+        RestAssured.baseURI="https://bddtrader.herokuapp.com";
     }
 
     @Test
@@ -29,7 +29,7 @@ public class H_PUTCall {
         String jsonBody = getJSONPayloadFromPOJO(pojoClassObj);
 
         String id = given()
-                .basePath("/api/client")
+                .basePath("api/client")
                 .contentType(ContentType.JSON)
                 .body(jsonBody)
                 .when()
@@ -44,7 +44,7 @@ public class H_PUTCall {
         jsonBody = getJSONPayloadFromPOJO(pojoClassObj);
 
         given()
-                .basePath("/api/client/{clientId}")
+                .basePath("api/client/{clientId}")
                 .pathParam("clientId",id)
                 .contentType(ContentType.JSON)
                 .body(jsonBody)
@@ -56,7 +56,7 @@ public class H_PUTCall {
 
         // Verify the resource using ID
         given()
-                .basePath("/api/client/{clientId}")
+                .basePath("api/client/{clientId}")
                 .pathParam("clientId",id)
         .when()
                 .log().all()
@@ -78,7 +78,7 @@ public class H_PUTCall {
         String jsonBody = getJSONPayloadFromPOJO(pojoClassObj);
 
         String id = given()
-                .basePath("/api/client")
+                .basePath("api/client")
                 .contentType(ContentType.JSON)
                 .body(jsonBody)
                 .when()
@@ -91,7 +91,7 @@ public class H_PUTCall {
         jsonMapObj.put("email","pam@gmail.com");
 
         given()
-                .basePath("/api/client/{clientId}")
+                .basePath("api/client/{clientId}")
                 .pathParam("clientId",id)
                 .contentType(ContentType.JSON)
                 .body(jsonMapObj)
@@ -104,7 +104,7 @@ public class H_PUTCall {
 
         // Verify the resource using ID
         given()
-                .basePath("/api/client/{clientId}")
+                .basePath("api/client/{clientId}")
                 .pathParam("clientId",id)
                 .when()
                 .log().all()

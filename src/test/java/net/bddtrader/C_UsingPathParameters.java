@@ -16,7 +16,7 @@ public class C_UsingPathParameters {
 
     @Test
     public void basic_RESTAssured_GET_Call_Way1() {
-        RestAssured.get("/api/stock/{stockId}/company","aapl")  // Replacing dynamic part of base path with Path Parameter/ placeholder and passing the value afterwards
+        RestAssured.get("api/stock/{stockId}/company","aapl")  // Replacing dynamic part of base path with Path Parameter/ placeholder and passing the value afterwards
                 .then()
                 .log().all()
                 .body("companyName", Matchers.equalTo("Apple, Inc."))
@@ -29,7 +29,7 @@ public class C_UsingPathParameters {
                 pathParam("stockId","aapl").    // Creating path parameter with a value for replacement
         when().
                 log().all().
-                get("/api/stock/{stockId}/company"). // Replacing dynamic part of base path with Path Parameter/ placeholder
+                get("api/stock/{stockId}/company"). // Replacing dynamic part of base path with Path Parameter/ placeholder
         then().
                 log().all().
                 body("companyName", Matchers.equalTo("Apple, Inc.")).

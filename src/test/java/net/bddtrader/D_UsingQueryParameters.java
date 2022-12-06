@@ -1,12 +1,12 @@
 package net.bddtrader;
 
 import io.restassured.RestAssured;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsStringIgnoringCase;
+import static org.hamcrest.Matchers.everyItem;
 
 public class D_UsingQueryParameters {
 
@@ -23,7 +23,7 @@ public class D_UsingQueryParameters {
                 queryParam("symbols",queryParamValue).
         when().
                 log().all().
-                get("/api/news").
+                get("api/news").
         then().
                 log().body().
                 body("related",everyItem(containsStringIgnoringCase(queryParamValue)));
