@@ -1,8 +1,11 @@
 package net.bddtrader;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import net.bddtrader.clients.Client;
+import net.bddtrader.pojo.POJOClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,6 +13,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.bddtrader.pojo.POJOClass.*;
 import static net.serenitybdd.rest.RestRequests.given;
 import static org.hamcrest.Matchers.*;
 
@@ -67,8 +71,39 @@ public class F_POSTCall {
                 .body("lastName",equalTo("Atkins"));
     }
 
+    @Test
+    public void post_with_JSONBody_as_POJO_Simple_Way() throws JsonProcessingException {
+        // Creating an Object of POJO Class
+        POJOClass pojoObj = new POJOClass();
+        pojoObj.setFirstName("Sumit");
+        pojoObj.setLastName("Saha");
+        pojoObj.setEmail("sumit.saha@gmail.com");
+
+        // Converting Java class object into JSON payload
+        ObjectMapper objectMapper = new ObjectMapper();
+        String clientJSONBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(pojoObj);
+
+        System.out.println("**** JSON BODY formed using POJO class object: "+clientJSONBody);
+
+        given()
+                .basePath("/api/client")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.ANY)
+                .body(clientJSONBody)
+        .when()
+                .log().all()
+                .post()
+        .then()
+                .log().body()
+                .statusCode(200)
+                .body("id",not(equalTo(0)))
+                .body("email",equalTo("sumit.saha@gmail.com"))
+                .body("firstName",equalTo("Sumit"))
+                .body("lastName",equalTo("Saha"));
+    }
+
 @Test
-    public void post_with_JSONBody_as_POJO(){
+    public void post_with_JSONBody_as_POJO_JF_Way(){
 
     Client jsonClassObject = Client.withFirstName("Sumit")
                                 .andLastName("Saha")
@@ -89,6 +124,8 @@ public class F_POSTCall {
             .body("firstName",equalTo("Sumit"))
             .body("lastName",equalTo("Saha"));
     }
+
+
 
     @Test
     public void post_with_JSONBody_as_Map(){
