@@ -1,4 +1,4 @@
-package net.bddtrader;
+package net.bddtrader.a_Restassured;
 
 import io.restassured.RestAssured;
 import org.junit.Before;
@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsStringIgnoringCase;
 import static org.hamcrest.Matchers.everyItem;
 
-public class D_UsingQueryParameters {
+public class D_QueryParams {
 
     String queryParamValue = "AAPL";
 

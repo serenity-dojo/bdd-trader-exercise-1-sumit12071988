@@ -1,4 +1,4 @@
-package net.bddtrader;
+package net.bddtrader.a_Restassured;
 
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class B_RefactoringBasicGETCall {
+public class B_RefactoredGET {
 
     @Before
     public void background() {

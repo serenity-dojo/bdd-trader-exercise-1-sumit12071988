@@ -1,4 +1,4 @@
-package net.bddtrader.unittests.stocks;
+package net.bddtrader.z2_unittests.stocks;
 
 import net.bddtrader.stocks.StockController;
 import net.bddtrader.tradingdata.TradingData;

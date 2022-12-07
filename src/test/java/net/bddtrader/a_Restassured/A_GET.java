@@ -1,13 +1,12 @@
-package net.bddtrader;
+package net.bddtrader.a_Restassured;
 
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
-import org.junit.Before;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class A_BasicGETCall {
+public class A_GET {
 
     @Test
     public void basic_RESTAssured_GET_Call_Way1() {

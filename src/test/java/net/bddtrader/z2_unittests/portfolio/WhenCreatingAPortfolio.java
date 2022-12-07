@@ -1,4 +1,4 @@
-package net.bddtrader.unittests.portfolio;
+package net.bddtrader.z2_unittests.portfolio;
 
 import net.bddtrader.config.TradingDataSource;
 import net.bddtrader.portfolios.InsufficientFundsException;

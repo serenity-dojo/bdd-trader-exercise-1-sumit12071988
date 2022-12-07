@@ -1,4 +1,4 @@
-package net.bddtrader;
+package net.bddtrader.a_Restassured;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +15,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class H_PUTCall {
+public class H_PUT {
     @Before
     public void setupBaseURL(){
         RestAssured.baseURI="https://bddtrader.herokuapp.com";

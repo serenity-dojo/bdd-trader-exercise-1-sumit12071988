@@ -1,4 +1,4 @@
-package net.bddtrader.unittests.status;
+package net.bddtrader.z2_unittests.status;
 
 import net.bddtrader.config.TradingDataSource;
 import net.bddtrader.status.StatusController;

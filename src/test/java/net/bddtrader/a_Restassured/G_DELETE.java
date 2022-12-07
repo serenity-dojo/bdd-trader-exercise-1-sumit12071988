@@ -1,4 +1,4 @@
-package net.bddtrader;
+package net.bddtrader.a_Restassured;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class G_DELETECall {
+public class G_DELETE {
     @Before
     public void setupBaseURL(){
         RestAssured.baseURI="https://bddtrader.herokuapp.com";

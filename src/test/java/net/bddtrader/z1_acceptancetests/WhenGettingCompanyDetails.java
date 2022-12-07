@@ -1,4 +1,4 @@
-package net.bddtrader.acceptancetests;
+package net.bddtrader.z1_acceptancetests;
 
 import io.restassured.RestAssured;
 import org.junit.Test;

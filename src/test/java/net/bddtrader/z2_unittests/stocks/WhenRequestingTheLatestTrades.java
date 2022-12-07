@@ -1,9 +1,8 @@
-package net.bddtrader.unittests.stocks;
+package net.bddtrader.z2_unittests.stocks;
 
 import net.bddtrader.stocks.StockController;
 import net.bddtrader.tradingdata.TradingData;
 import net.bddtrader.tradingdata.services.NoSuchCompanyException;
-import net.bddtrader.tradingdata.services.UnknownCompanyException;
 import org.junit.Before;
 import org.junit.Test;
 

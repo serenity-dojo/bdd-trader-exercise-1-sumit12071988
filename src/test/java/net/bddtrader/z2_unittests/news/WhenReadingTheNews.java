@@ -1,4 +1,4 @@
-package net.bddtrader.unittests.news;
+package net.bddtrader.z2_unittests.news;
 
 import net.bddtrader.news.NewsController;
 import net.bddtrader.news.NewsItem;

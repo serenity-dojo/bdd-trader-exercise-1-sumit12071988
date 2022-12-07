@@ -1,4 +1,4 @@
-package net.bddtrader.unittests.tops;
+package net.bddtrader.z2_unittests.tops;
 
 import net.bddtrader.tops.TopController;
 import net.bddtrader.tradingdata.TradingData;
