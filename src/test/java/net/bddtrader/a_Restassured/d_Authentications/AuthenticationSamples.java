@@ -1,4 +1,4 @@
-package net.bddtrader.a_Restassured;
+package net.bddtrader.a_Restassured.d_Authentications;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -11,7 +11,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class J_Authentication {
+public class AuthenticationSamples {
     @Before
     public void setup(){
         RestAssured.baseURI="https://bddtrader.herokuapp.com";

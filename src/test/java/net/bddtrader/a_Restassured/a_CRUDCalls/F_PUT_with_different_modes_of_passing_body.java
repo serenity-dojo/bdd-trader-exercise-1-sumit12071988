@@ -1,10 +1,10 @@
-package net.bddtrader.a_Restassured;
+package net.bddtrader.a_Restassured.a_CRUDCalls;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import net.bddtrader.pojo.POJOClass;
+import net.bddtrader.pojo.asClass.A_POJOWithoutConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class H_PUT {
+public class F_PUT_with_different_modes_of_passing_body {
     @Before
     public void setupBaseURL(){
         RestAssured.baseURI="https://bddtrader.herokuapp.com";
@@ -25,8 +25,8 @@ public class H_PUT {
     public void updateAResourceUsingPOJO() throws JsonProcessingException {
         // Create a resource
         // Given a client exists
-        POJOClass pojoClassObj = setPOJOData("Pam","Beasley","pam.beasley@gmail.com");
-        String jsonBody = getJSONPayloadFromPOJO(pojoClassObj);
+        A_POJOWithoutConstructor APojoWithoutConstructorObj = setPOJOData("Pam","Beasley","pam.beasley@gmail.com");
+        String jsonBody = getJSONPayloadFromPOJO(APojoWithoutConstructorObj);
 
         String id = given()
                 .basePath("api/client")
@@ -40,8 +40,8 @@ public class H_PUT {
         System.out.println("**** id is: "+id);
 
         // Updating resource attributes
-        pojoClassObj = setPOJOData("Pam","Beasley","pam@gmail.com");
-        jsonBody = getJSONPayloadFromPOJO(pojoClassObj);
+        APojoWithoutConstructorObj = setPOJOData("Pam","Beasley","pam@gmail.com");
+        jsonBody = getJSONPayloadFromPOJO(APojoWithoutConstructorObj);
 
         given()
                 .basePath("api/client/{clientId}")
@@ -74,8 +74,8 @@ public class H_PUT {
     public void updateAResourceUsingMap() throws JsonProcessingException {
         // Create a resource
         // Given a client exists
-        POJOClass pojoClassObj = setPOJOData("Pam", "Beasley", "pam.beasley@gmail.com");
-        String jsonBody = getJSONPayloadFromPOJO(pojoClassObj);
+        A_POJOWithoutConstructor APojoWithoutConstructorObj = setPOJOData("Pam", "Beasley", "pam.beasley@gmail.com");
+        String jsonBody = getJSONPayloadFromPOJO(APojoWithoutConstructorObj);
 
         String id = given()
                 .basePath("api/client")
@@ -114,18 +114,18 @@ public class H_PUT {
                 .body("email", equalTo("pam@gmail.com"));
     }
 
-    private static String getJSONPayloadFromPOJO(POJOClass pojoClassObj) throws JsonProcessingException {
+    private static String getJSONPayloadFromPOJO(A_POJOWithoutConstructor APojoWithoutConstructorObj) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(pojoClassObj);
+        String jsonBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(APojoWithoutConstructorObj);
         System.out.println("**** JSON Body: "+ jsonBody);
         return jsonBody;
     }
     @NotNull
-    private static POJOClass setPOJOData(String firstName, String lastName, String email) {
-        POJOClass pojoClassObj = new POJOClass();
-        pojoClassObj.setFirstName(firstName);
-        pojoClassObj.setLastName(lastName);
-        pojoClassObj.setEmail(email);
-        return pojoClassObj;
+    private static A_POJOWithoutConstructor setPOJOData(String firstName, String lastName, String email) {
+        A_POJOWithoutConstructor APojoWithoutConstructorObj = new A_POJOWithoutConstructor();
+        APojoWithoutConstructorObj.setFirstName(firstName);
+        APojoWithoutConstructorObj.setLastName(lastName);
+        APojoWithoutConstructorObj.setEmail(email);
+        return APojoWithoutConstructorObj;
     }
 }

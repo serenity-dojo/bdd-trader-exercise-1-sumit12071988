@@ -1,10 +1,10 @@
-package net.bddtrader.a_Restassured;
+package net.bddtrader.a_Restassured.a_CRUDCalls;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import net.bddtrader.pojo.POJOClass;
+import net.bddtrader.pojo.asClass.A_POJOWithoutConstructor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,13 +19,13 @@ public class G_DELETE {
     @Test
     public void deleteAResource() throws JsonProcessingException {
         // Given a client exists
-        POJOClass pojoClassObj = new POJOClass();
-        pojoClassObj.setFirstName("Pam");
-        pojoClassObj.setLastName("Beasley");
-        pojoClassObj.setEmail("pam.beasley@gmail.com");
+        A_POJOWithoutConstructor APojoWithoutConstructorObj = new A_POJOWithoutConstructor();
+        APojoWithoutConstructorObj.setFirstName("Pam");
+        APojoWithoutConstructorObj.setLastName("Beasley");
+        APojoWithoutConstructorObj.setEmail("pam.beasley@gmail.com");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(pojoClassObj);
+        String jsonBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(APojoWithoutConstructorObj);
         System.out.println("**** JSON Body: "+ jsonBody);
 
         String id = given()

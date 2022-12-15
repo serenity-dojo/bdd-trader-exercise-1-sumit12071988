@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Client {
-// ---------------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------------------------------
     // Step 1: Create Private variables for KEYS
     private final Long id;
     private final String firstName;
     private final String lastName;
     private final String email;
-// ---------------------------------------------------------------------------------------------------------------------
+
+    // ---------------------------------------------------------------------------------------------------------------------
     // Step 2: Create constructor to act as SETTERS
     @JsonCreator
     public Client(@JsonProperty("id") Long id,
@@ -22,7 +23,8 @@ public class Client {
         this.lastName = lastName;
         this.email = email;
     }
-// ---------------------------------------------------------------------------------------------------------------------
+
+    // ---------------------------------------------------------------------------------------------------------------------
     // Step 3: Create Public GETTERS
     public Long getId() {
         return id;
@@ -39,19 +41,25 @@ public class Client {
     public String getEmail() {
         return email;
     }
-// ------- INTERFACES --------------------------------------------------------------------------------------------------
+
+    // ---------------------------------------------------------------------------------------------------------------------
+    // The very 1st method needs to be made as static so that we can call using class reference
+    // Return Type is the Object of ClientBuilder + passing value to it via parameterized constructor
     public static AndLastName withFirstName(String firstName) {
         return new ClientBuilder(firstName);    // returning object of ClientBuilder class for method chaining
     }
 
+
+    // ------- INTERFACES --------------------------------------------------------------------------------------------------
     public interface AndLastName {
         AndEmail andLastName(String lastName);  // abstract method
     }
+
     public interface AndEmail {
         Client andEmail(String email);  // abstract method
     }
-// ---------------------------------------------------------------------------------------------------------------------
 
+    // ---------------------------------------------------------------------------------------------------------------------
     public static class ClientBuilder implements AndLastName, AndEmail {
         private final String firstName;
         private String lastName;

@@ -1,4 +1,4 @@
-package net.bddtrader.a_Restassured;
+package net.bddtrader.a_Restassured.c_ResponseDataExtraction;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,23 +6,21 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import net.bddtrader.pojo.POJOClass;
+import net.bddtrader.pojo.asClass.A_POJOWithoutConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.InputStream;
-
 import static io.restassured.RestAssured.given;
 
-public class I_FetchAnyDataFromResponse {
+public class DifferentWaysToExtractAnyDataFromResponse {
 
     String jsonBody;
 
     @Before
     public void setupBaseURL() throws JsonProcessingException {
         RestAssured.baseURI="https://bddtrader.herokuapp.com";
-        POJOClass pojoObj = setPOJOData("Pam","Beasley","pam.beasley@gmail.com");
+        A_POJOWithoutConstructor pojoObj = setPOJOData("Pam","Beasley","pam.beasley@gmail.com");
         jsonBody = convertPOJOToJSON(pojoObj);
     }
 
@@ -119,12 +117,12 @@ public class I_FetchAnyDataFromResponse {
 
     /**
      * Sub Method
-     * @param pojoClassObj Object of POJO Class
+     * @param APojoWithoutConstructorObj Object of POJO Class
      * @return String which represents JSON Payload
      */
-    private static String convertPOJOToJSON(POJOClass pojoClassObj) throws JsonProcessingException {
+    private static String convertPOJOToJSON(A_POJOWithoutConstructor APojoWithoutConstructorObj) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(pojoClassObj);
+        String jsonBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(APojoWithoutConstructorObj);
         System.out.println("**** JSON Body ******"+ '\n' + jsonBody);
         return jsonBody;
     }
@@ -137,11 +135,11 @@ public class I_FetchAnyDataFromResponse {
      * @return Pojo class object
      */
     @NotNull
-    private static POJOClass setPOJOData(String firstName, String lastName, String email) {
-        POJOClass pojoClassObj = new POJOClass();
-        pojoClassObj.setFirstName(firstName);
-        pojoClassObj.setLastName(lastName);
-        pojoClassObj.setEmail(email);
-        return pojoClassObj;
+    private static A_POJOWithoutConstructor setPOJOData(String firstName, String lastName, String email) {
+        A_POJOWithoutConstructor APojoWithoutConstructorObj = new A_POJOWithoutConstructor();
+        APojoWithoutConstructorObj.setFirstName(firstName);
+        APojoWithoutConstructorObj.setLastName(lastName);
+        APojoWithoutConstructorObj.setEmail(email);
+        return APojoWithoutConstructorObj;
     }
 }

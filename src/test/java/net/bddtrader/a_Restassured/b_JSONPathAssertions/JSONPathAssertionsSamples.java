@@ -1,4 +1,4 @@
-package net.bddtrader.a_Restassured;
+package net.bddtrader.a_Restassured.b_JSONPathAssertions;
 
 import io.restassured.RestAssured;
 import org.junit.Before;
@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 
-public class E_JSONPathAssertions {
+public class JSONPathAssertionsSamples {
 
     @Before
     public void prepare_rest_config() {

@@ -1,11 +1,13 @@
-package net.bddtrader.a_Restassured;
+package net.bddtrader.a_Restassured.a_CRUDCalls;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import net.bddtrader.clients.Client;
-import net.bddtrader.pojo.POJOClass;
+import net.bddtrader.pojo.asClass.A_POJOWithoutConstructor;
+import net.bddtrader.pojo.asClass.B_POJOWithConstructor;
+import net.bddtrader.pojo.asClass.C_POJO_JFWay;
+import net.bddtrader.pojo.asRecord.POJORecord;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +19,7 @@ import static net.serenitybdd.rest.RestRequests.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
-public class F_POST {
+public class E_POST_with_different_modes_of_passing_body {
 
     @Before
     public void setupBaseURL(){
@@ -72,16 +74,16 @@ public class F_POST {
     }
 
     @Test
-    public void post_with_JSONBody_as_POJO_Simple_Way() throws JsonProcessingException {
+    public void post_with_JSONBody_as_POJO_Class_without_constructor() throws JsonProcessingException {
         // Creating an Object of POJO Class
-        POJOClass pojoObj = new POJOClass();
-        pojoObj.setFirstName("Sumit");
-        pojoObj.setLastName("Saha");
-        pojoObj.setEmail("sumit.saha@gmail.com");
+        A_POJOWithoutConstructor pojoWithoutConstructorObj = new A_POJOWithoutConstructor();
+        pojoWithoutConstructorObj.setFirstName("Sumit");
+        pojoWithoutConstructorObj.setLastName("Saha");
+        pojoWithoutConstructorObj.setEmail("sumit.saha@gmail.com");
 
         // Converting Java class object into JSON payload
         ObjectMapper objectMapper = new ObjectMapper();
-        String clientJSONBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(pojoObj);
+        String clientJSONBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(pojoWithoutConstructorObj);
 
         System.out.println("**** JSON BODY formed using POJO class object: "+clientJSONBody);
 
@@ -100,30 +102,75 @@ public class F_POST {
                 .body("email",equalTo("sumit.saha@gmail.com"))
                 .body("firstName",equalTo("Sumit"))
                 .body("lastName",equalTo("Saha"));
+
     }
 
-@Test
+    @Test
+    public void post_with_JSONBody_as_POJO_Class_with_constructor(){
+
+        B_POJOWithConstructor pojoWithConstructorObj = new B_POJOWithConstructor("Sumit","Saha","Sumit.saha@gmail.com");
+
+        given()
+                .basePath("api/client")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.ANY)
+                .body(pojoWithConstructorObj)
+        .when()
+                .post()
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("id",not(equalTo(0)))
+                .body("email",equalTo("Sumit.saha@gmail.com"))
+                .body("firstName",equalTo("Sumit"))
+                .body("lastName",equalTo("Saha"));
+    }
+
+    @Test
+    public void post_with_JSONBody_as_POJO_Record(){
+
+        POJORecord recordObj = new POJORecord("Sumit","Saha","Sumit.saha@gmail.com");
+
+        given()
+                .basePath("api/client")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.ANY)
+                .body(recordObj)
+        .when()
+                .post()
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("id",not(equalTo(0)))
+                .body("email",equalTo("Sumit.saha@gmail.com"))
+                .body("firstName",equalTo("Sumit"))
+                .body("lastName",equalTo("Saha"));
+    }
+
+    @Test
     public void post_with_JSONBody_as_POJO_JF_Way(){
 
-    Client jsonClassObject = Client.withFirstName("Sumit")
-                                .andLastName("Saha")
-                                .andEmail("sumit.saha@gmail.com");
+        C_POJO_JFWay CPojoJFWayObj = C_POJO_JFWay.withFirstName("Sumit")
+                                                        .andLastName("Saha")
+                                                        .andEmail("sumit@gmail.com");
 
-    given()
-            .basePath("api/client")
-            .contentType(ContentType.JSON)
-            .accept(ContentType.ANY)
-            .body(jsonClassObject)
-    .when()
-            .post()
-    .then()
-            .log().all()
-            .statusCode(200)
-            .body("id",not(equalTo(0)))
-            .body("email",equalTo("sumit.saha@gmail.com"))
-            .body("firstName",equalTo("Sumit"))
-            .body("lastName",equalTo("Saha"));
+        given()
+                .basePath("api/client")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.ANY)
+                .body(CPojoJFWayObj)
+        .when()
+                .post()
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("id",not(equalTo(0)))
+                .body("email",equalTo("sumit@gmail.com"))
+                .body("firstName",equalTo("Sumit"))
+                .body("lastName",equalTo("Saha"));
     }
+
+
 
 
 

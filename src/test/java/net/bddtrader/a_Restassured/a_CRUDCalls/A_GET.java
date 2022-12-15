@@ -1,4 +1,4 @@
-package net.bddtrader.a_Restassured;
+package net.bddtrader.a_Restassured.a_CRUDCalls;
 
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;

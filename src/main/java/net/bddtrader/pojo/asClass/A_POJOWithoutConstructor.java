@@ -1,4 +1,4 @@
-package net.bddtrader.pojo;
+package net.bddtrader.pojo.asClass;
 
 /**
  * NOTE: WHEN CREATING POJO CLASS, THE FOLLOWING ARE MANDATORY EVEN IF NOT USED:
@@ -6,7 +6,7 @@ package net.bddtrader.pojo;
  * 2. GETTERS
  * 3. SETTERS
  */
-public class POJOClass {
+public class A_POJOWithoutConstructor {
     // STEP1: CREATE JSON KEYS AS PRIVATE VARIABLES
     private String firstName, lastName, email;
 
