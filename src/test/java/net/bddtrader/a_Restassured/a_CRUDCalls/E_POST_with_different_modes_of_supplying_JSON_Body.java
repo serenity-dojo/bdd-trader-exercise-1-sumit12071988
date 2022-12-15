@@ -19,7 +19,7 @@ import static net.serenitybdd.rest.RestRequests.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
-public class E_POST_with_different_modes_of_passing_body {
+public class E_POST_with_different_modes_of_supplying_JSON_Body {
 
     @Before
     public void setupBaseURL(){
