@@ -1,4 +1,4 @@
-package net.bddtrader.pojo.asClass;
+package net.bddtrader.pojo.asClass.ConventionalWay;
 
 public class B_POJOWithConstructor {
     //------ STEP1: PRIVATE VARIABLES -----------------------------------------------

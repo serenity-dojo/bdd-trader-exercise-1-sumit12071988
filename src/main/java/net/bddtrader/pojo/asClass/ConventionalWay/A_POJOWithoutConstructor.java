@@ -1,4 +1,4 @@
-package net.bddtrader.pojo.asClass;
+package net.bddtrader.pojo.asClass.ConventionalWay;
 
 /**
  * NOTE: WHEN CREATING POJO CLASS, THE FOLLOWING ARE MANDATORY EVEN IF NOT USED:

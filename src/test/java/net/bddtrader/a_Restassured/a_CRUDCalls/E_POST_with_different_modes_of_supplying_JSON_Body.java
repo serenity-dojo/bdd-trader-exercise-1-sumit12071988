@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import net.bddtrader.pojo.asClass.A_POJOWithoutConstructor;
-import net.bddtrader.pojo.asClass.B_POJOWithConstructor;
-import net.bddtrader.pojo.asClass.C_POJO_JFWay;
+import net.bddtrader.pojo.asClass.ConventionalWay.A_POJOWithoutConstructor;
+import net.bddtrader.pojo.asClass.ConventionalWay.B_POJOWithConstructor;
+import net.bddtrader.pojo.asClass.JFWay.Client;
 import net.bddtrader.pojo.asRecord.POJORecord;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +26,7 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
         RestAssured.baseURI="https://bddtrader.herokuapp.com";
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     @Test
     public void post_with_JSONBody_as_String(){
         String jsonBody= """
@@ -51,7 +52,7 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Scott"))
                 .body("lastName",equalTo("Atkins"));
     }
-
+    //------------------------------------------------------------------------------------------------------------------
     @Test
     public void post_with_JSONBody_as_File(){
         File fileObject = new File("src/test/resources/client.json");
@@ -72,7 +73,32 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Scott"))
                 .body("lastName",equalTo("Atkins"));
     }
+    //------------------------------------------------------------------------------------------------------------------
+    @Test
+    public void post_with_JSONBody_as_Map(){
+        Map<String,Object> jsonMapObject = new HashMap<>();
+        jsonMapObject.put("firstName","Sumit");
+        jsonMapObject.put("lastName","Saha");
+        jsonMapObject.put("email","sumit.saha@gmail.com");
+        jsonMapObject.put("address","Texas");   // Creating a Key which is not required in JSON Body using maps will not affect the outcome
+        //  This KEY in this case will be ignored and only required keys will be passed by Rest Assured
 
+        given()
+                .basePath("api/client")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.ANY)
+                .body(jsonMapObject)
+        .when()
+                .log().all()
+                .post()
+        .then()
+                .statusCode(200)
+                .body("id",not(equalTo(0)))
+                .body("email",equalTo("sumit.saha@gmail.com"))
+                .body("firstName",equalTo("Sumit"))
+                .body("lastName",equalTo("Saha"));
+    }
+    //------------------------------------------------------------------------------------------------------------------
     @Test
     public void post_with_JSONBody_as_POJO_Class_without_constructor() throws JsonProcessingException {
         // Creating an Object of POJO Class
@@ -104,10 +130,10 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("lastName",equalTo("Saha"));
 
     }
-
+    //------------------------------------------------------------------------------------------------------------------
     @Test
     public void post_with_JSONBody_as_POJO_Class_with_constructor(){
-
+        // Creating an Object of POJO Class
         B_POJOWithConstructor pojoWithConstructorObj = new B_POJOWithConstructor("Sumit","Saha","Sumit.saha@gmail.com");
 
         given()
@@ -125,10 +151,10 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Sumit"))
                 .body("lastName",equalTo("Saha"));
     }
-
+    //------------------------------------------------------------------------------------------------------------------
     @Test
     public void post_with_JSONBody_as_POJO_Record(){
-
+        // Creating an Object of POJO Record
         POJORecord recordObj = new POJORecord("Sumit","Saha","Sumit.saha@gmail.com");
 
         given()
@@ -146,19 +172,19 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Sumit"))
                 .body("lastName",equalTo("Saha"));
     }
-
+    //------------------------------------------------------------------------------------------------------------------
     @Test
     public void post_with_JSONBody_as_POJO_JF_Way(){
-
-        C_POJO_JFWay CPojoJFWayObj = C_POJO_JFWay.withFirstName("Sumit")
-                                                        .andLastName("Saha")
-                                                        .andEmail("sumit@gmail.com");
+        // Creating an Object of POJO Class
+        Client client = Client.withFirstName("Sumit")
+                                .andLastName("Saha")
+                                .andEmail("sumit@gmail.com");
 
         given()
                 .basePath("api/client")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.ANY)
-                .body(CPojoJFWayObj)
+                .body(client)
         .when()
                 .post()
         .then()
@@ -169,34 +195,4 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Sumit"))
                 .body("lastName",equalTo("Saha"));
     }
-
-
-
-
-
-    @Test
-    public void post_with_JSONBody_as_Map(){
-        Map<String,Object> jsonMapObject = new HashMap<>();
-        jsonMapObject.put("firstName","Sumit");
-        jsonMapObject.put("lastName","Saha");
-        jsonMapObject.put("email","sumit.saha@gmail.com");
-        jsonMapObject.put("address","Texas");   // Creating a Key which is not required in JSON Body using maps will not affect the outcome
-                                                //  This KEY in this case will be ignored and only required keys will be passed by Rest Assured
-
-        given()
-                .basePath("api/client")
-                .contentType(ContentType.JSON)
-                .accept(ContentType.ANY)
-                .body(jsonMapObject)
-        .when()
-                .log().all()
-                .post()
-        .then()
-                .statusCode(200)
-                .body("id",not(equalTo(0)))
-                .body("email",equalTo("sumit.saha@gmail.com"))
-                .body("firstName",equalTo("Sumit"))
-                .body("lastName",equalTo("Saha"));
-    }
-
 }

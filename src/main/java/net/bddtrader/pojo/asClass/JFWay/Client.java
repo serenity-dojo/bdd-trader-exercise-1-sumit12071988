@@ -1,9 +1,9 @@
-package net.bddtrader.pojo.asClass;
+package net.bddtrader.pojo.asClass.JFWay;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class C_POJO_JFWay {
+public class Client {
     // ---------------------------------------------------------------------------------------------------
     // Step1: Create private final variables for Json KEYS
     private final Long id;
@@ -15,10 +15,10 @@ public class C_POJO_JFWay {
     // Step2: Create parameterized constructor which acts as SETTER
     //      This SETTER will get values from Builder class
     @JsonCreator
-    public C_POJO_JFWay(@JsonProperty("id") Long id,
-                        @JsonProperty("firstName") String firstName,
-                        @JsonProperty("lastName") String lastName,
-                        @JsonProperty("email") String email) {
+    public Client(@JsonProperty("id") Long id,
+                  @JsonProperty("firstName") String firstName,
+                  @JsonProperty("lastName") String lastName,
+                  @JsonProperty("email") String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,7 +60,7 @@ public class C_POJO_JFWay {
     public interface AndEmail {
         // Create abstract method of main Class type so that overriding method needs to create
         //      object of that class
-        C_POJO_JFWay andEmail(String email);
+        Client andEmail(String email);
     }
 
     // ---------------------------------------------------------------------------------------------------
@@ -81,8 +81,8 @@ public class C_POJO_JFWay {
         }
 
         @Override
-        public C_POJO_JFWay andEmail(String email) {
-            return new C_POJO_JFWay(null, firstName, lastName, email);
+        public Client andEmail(String email) {
+            return new Client(null, firstName, lastName, email);
         }
     }
 }

@@ -6,7 +6,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import net.bddtrader.pojo.asClass.A_POJOWithoutConstructor;
+import net.bddtrader.pojo.asClass.ConventionalWay.A_POJOWithoutConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
