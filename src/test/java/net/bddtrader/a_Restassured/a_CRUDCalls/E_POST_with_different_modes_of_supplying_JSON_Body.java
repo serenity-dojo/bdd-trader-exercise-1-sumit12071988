@@ -7,6 +7,7 @@ import io.restassured.http.ContentType;
 import net.bddtrader.pojo.asClass.ConventionalWay.A_POJOWithoutConstructor;
 import net.bddtrader.pojo.asClass.ConventionalWay.B_POJOWithConstructor;
 import net.bddtrader.pojo.asClass.JFWay.Client;
+import net.bddtrader.pojo.asClass.ConventionalWay.C_POJOUsingMethodChaining;
 import net.bddtrader.pojo.asRecord.POJORecord;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
 
     //------------------------------------------------------------------------------------------------------------------
     @Test
-    public void post_with_JSONBody_as_String(){
+    public void way1_passing_body_as_String(){
         String jsonBody= """
                             {
                                 "email": "scott_atkins@gmail.com",
@@ -52,9 +53,10 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Scott"))
                 .body("lastName",equalTo("Atkins"));
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @Test
-    public void post_with_JSONBody_as_File(){
+    public void way2_passing_body_as_File(){
         File fileObject = new File("src/test/resources/client.json");
 
         given()
@@ -73,9 +75,10 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Scott"))
                 .body("lastName",equalTo("Atkins"));
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @Test
-    public void post_with_JSONBody_as_Map(){
+    public void way3_passing_body_as_Map(){
         Map<String,Object> jsonMapObject = new HashMap<>();
         jsonMapObject.put("firstName","Sumit");
         jsonMapObject.put("lastName","Saha");
@@ -98,9 +101,10 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Sumit"))
                 .body("lastName",equalTo("Saha"));
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @Test
-    public void post_with_JSONBody_as_POJO_Class_without_constructor() throws JsonProcessingException {
+    public void way4_passing_body_as_POJO_Class_without_constructor() throws JsonProcessingException {
         // Creating an Object of POJO Class
         A_POJOWithoutConstructor pojoWithoutConstructorObj = new A_POJOWithoutConstructor();
         pojoWithoutConstructorObj.setFirstName("Sumit");
@@ -130,9 +134,10 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("lastName",equalTo("Saha"));
 
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @Test
-    public void post_with_JSONBody_as_POJO_Class_with_constructor(){
+    public void way5_passing_body_as_POJO_Class_with_constructor(){
         // Creating an Object of POJO Class
         B_POJOWithConstructor pojoWithConstructorObj = new B_POJOWithConstructor("Sumit","Saha","Sumit.saha@gmail.com");
 
@@ -151,9 +156,33 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Sumit"))
                 .body("lastName",equalTo("Saha"));
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @Test
-    public void post_with_JSONBody_as_POJO_Record(){
+    public void way6_passing_body_as_POJO_using_Method_Chaining(){
+        // Creating an Object of POJO Class
+        C_POJOUsingMethodChaining newClient = C_POJOUsingMethodChaining.getInstance().withFirstName("Sumit")
+                                                                                        .andLastName("Saha")
+                                                                                        .andEmail("sumit@gmail.com");
+        given()
+                .basePath("api/client")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.ANY)
+                .body(newClient)
+        .when()
+                .post()
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("id",not(equalTo(0)))
+                .body("email",equalTo("sumit@gmail.com"))
+                .body("firstName",equalTo("Sumit"))
+                .body("lastName",equalTo("Saha"));
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    @Test
+    public void way7_passing_body_as_POJO_Record(){
         // Creating an Object of POJO Record
         POJORecord recordObj = new POJORecord("Sumit","Saha","Sumit.saha@gmail.com");
 
@@ -172,9 +201,10 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Sumit"))
                 .body("lastName",equalTo("Saha"));
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @Test
-    public void post_with_JSONBody_as_POJO_JF_Way(){
+    public void way8_passing_body_as_POJO_JF_Way(){
         // Creating an Object of POJO Class
         Client client = Client.withFirstName("Sumit")
                                 .andLastName("Saha")
@@ -195,4 +225,5 @@ public class E_POST_with_different_modes_of_supplying_JSON_Body {
                 .body("firstName",equalTo("Sumit"))
                 .body("lastName",equalTo("Saha"));
     }
+
 }
